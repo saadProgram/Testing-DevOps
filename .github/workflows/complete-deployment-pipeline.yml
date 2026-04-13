@@ -12,7 +12,7 @@ on:
         default: false
 
 env:
-  REGISTRY: ghcr.io 
+  REGISTRY: ghcr.io
   IMAGE_NAME: data-processor
 
 jobs:
@@ -50,7 +50,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          echo "Building Docker image: $IMAGE_NAME:${{ github.sha }}
+          echo "Building Docker image: $IMAGE_NAME:${{ github.sha }}"
           echo "Docker image build completed"
 
   deploy-staging:
@@ -73,7 +73,8 @@ jobs:
     needs: [build, deploy-staging]
     runs-on: ubuntu-latest
     environment: production
-    if: github.event.inputs.deploy_to_prod == true
+    # CORRECTED: Changed to use the modern 'inputs' context for accurate boolean evaluation
+    if: inputs.deploy_to_prod == true
 
     steps:
       - name: Pre-deployment validation
@@ -98,7 +99,7 @@ jobs:
     environment: production
 
     steps:
-    - name: Rollback
-      run: |
-        echo "Deployment failed, rolling back..."
-        echo "Rollback completed"
+      - name: Rollback
+        run: |
+          echo "Deployment failed, rolling back..."
+          echo "Rollback completed"
