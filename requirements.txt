@@ -1,0 +1,9 @@
+# Core Data Processing
+pandas==2.2.1
+sqlalchemy==2.0.28
+
+# Testing
+pytest==8.1.1
+
+# Database Drivers (Example: if using PostgreSQL)
+# psycopg2-binary==2.9.9
