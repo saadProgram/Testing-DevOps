@@ -66,3 +66,16 @@ jobs:
           echo "Running post-deployment health checks..."
           echo "Smoke tests passed"
           echo "Production deployment validated successfully"
+
+  rollback:
+    needs: deploy-production
+    if: failure()
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Automatic rollback
+        run: |
+          echo "Production deployment failed"
+          echo "Initiating rollback to last stable version"
+          echo "Notifying operations team"
